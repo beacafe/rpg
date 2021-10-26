@@ -10,20 +10,23 @@ let idade = "";
 let raca = "";
 let classe = ""; 
 
+const labelResposta = "Sua resposta: ";
+
 const possibleRaces = ["Elfo", "Humano", "Vampiro", "Orc", "Anão"];
 const possibleClasses = ["Bardo", "Ladino", "Necromante", "Clerigo", "Curandeiro", "Monge", "Druida", "Barbaro", "Arqueiro", "Espadachim", "Ninja", "Samurai", "Mago", "Feiticeiro", "Helicoptero de Caça"];
 
 function recursividadeNome(){
-    leitor.question("Olá, por favor me diga seu nome\n" , (nomeResposta) => {
+    leitor.question("Olá, por favor me diga seu nome\n" + labelResposta , (nomeResposta) => {
         nome = nomeResposta;
+    
         recursividadeGenero();
     });
 }
  
 function recursividadeGenero(){
-    leitor.question("Qual seu genere?\n" , (genereResposta) => {
+    leitor.question("Qual seu genere?\n" + labelResposta , (genereResposta) => {
         if(genereResposta != "M" && genereResposta != "F" && genereResposta != "N" && genereResposta != "") {
-            console.log("Não conheço esses pronomes :c")
+            console.log("\nNão conheço esses pronomes :c")
             recursividadeGenero();
         }
         else{
@@ -31,17 +34,18 @@ function recursividadeGenero(){
             recursividadeIdade();
         }
     })   
+
 };
 
 function recursividadeIdade(){
-    leitor.question("E a sua idade?\n" , (idadeAe) => {
+    leitor.question("E a sua idade?\n" + labelResposta , (idadeAe) => {
         if(idadeAe > 0){
             idade = idadeAe;
             recursividadeRaca();
         }
         
         else{
-            console.log("Idade Incorreta.\n");
+            console.log("\nIdade Incorreta.\n");
             recursividadeIdade();
         }
     })
@@ -60,14 +64,17 @@ function recursividadeRaca(){
             recursividadeClasse();
         }
     });
-    console.log("Possiveis Raças:\n")
+    console.log("Possiveis Raças:")
+    let racasConcatenadas = "";
     for(let percorreRaca = 0; percorreRaca < possibleRaces.length; percorreRaca++){
-        console.log(possibleRaces[percorreRaca])
+        racasConcatenadas += possibleRaces[percorreRaca] + ', ';
     }
+    console.log(racasConcatenadas);
+    console.log(labelResposta);
 }
 
 function recursividadeClasse(){
-    leitor.question("Agora me diga a sua classe.", (insiraClasse) => {
+    leitor.question("Agora me diga a sua classe.\n", (insiraClasse) => {
         let respostaClasse = insiraClasse.trim();
         if(possibleClasses.find((classe)=>{return classe == respostaClasse;})){
             classe = respostaClasse;
@@ -79,20 +86,26 @@ function recursividadeClasse(){
 
         }
     })
+    console.log("Classes possiveis:")
+    let classesConcatenadas = "";
     for(let percorreClasse = 0; percorreClasse < possibleClasses.length; percorreClasse++){
-        console.log(possibleClasses[percorreClasse])
+        classesConcatenadas += possibleClasses[percorreClasse] + ', ';
     }
+    console.log(classesConcatenadas);
+    console.log(labelResposta);
 };
 
 function dadosUsuario(){
     console.log(`Seus dados:
-        Nome: ${nome}
-        Gênero: ${genero}
-        Idade: ${idade}
-        Raça: ${raca}
-        Classe: ${classe}
+    __________________________________
+    Nome: ${nome}               
+    Gênero: ${genero}           
+    Idade: ${idade}             
+    Raça: ${raca}               
+    Classe: ${classe}           
+    ------------#---JS---#------------
     `)
-    leitor.question("Deseja alterar?",(respostaFinal) => {
+    leitor.question("Deseja alterar?\nResponda: ",(respostaFinal) => {
         if(respostaFinal == "Sim"){
             recursividadeNome();
         }

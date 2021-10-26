@@ -1,0 +1,1 @@
+![Resultado](/Prints/Screenshot_1.png)
